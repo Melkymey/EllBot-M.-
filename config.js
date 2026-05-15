@@ -522,12 +522,14 @@ ch21: '120363420992828502@newsletter',
 ch22: '120363420238618096@newsletter'
 }
 
-let file = fileURLToPath(import.meta.url)
-watchFile(file, () => {
-unwatchFile(file)
-console.log(chalk.redBright("Update 'config.js'"))
-import(`${file}?update=${Date.now()}`)
-})
+if (process.env.NODE_ENV !== 'production') {
+    let file = fileURLToPath(import.meta.url)
+    watchFile(file, () => {
+        unwatchFile(file)
+        console.log(chalk.redBright("Update 'config.js'"))
+        import(`${file}?update=${Date.now()}`)
+    })
+}
 
 global.yt = 'https://youtube.com/@ellbotmk'
 global.ig = 'https://www.instagram.com/ellbot_mk'
